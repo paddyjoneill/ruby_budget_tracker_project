@@ -19,5 +19,8 @@ CREATE TABLE transactions
 (
   id SERIAL primary key,
   merchant_id INT references merchants(id),
-  category_id INT references categories(id)
+  category_id INT references categories(id),
+  amount INT,
+  time VARCHAR(255),
+  date VARCHAR(255)
 );
