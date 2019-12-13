@@ -1,6 +1,10 @@
 require_relative('../db/sqlrunner')
+require_relative('./category')
 
 class Merchant
+
+  attr_reader :id
+  attr_accessor :name, :default_cat_id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -46,6 +50,12 @@ class Merchant
     values = [@name, @default_cat_id, @id]
     SqlRunner.run(sql, values)
   end
+
+  def self.delete_all
+    sql = "DELETE FROM merchants"
+    SqlRunner.run( sql )
+  end
+
 
 
 

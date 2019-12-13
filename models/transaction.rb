@@ -1,6 +1,10 @@
 require_relative('../db/sqlrunner')
+require_relative('./merchant')
+require_relative('./category')
 
 class Transaction
+
+  attr_reader :id, :merchant_id, :category_id, :amount, :time, :date
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
