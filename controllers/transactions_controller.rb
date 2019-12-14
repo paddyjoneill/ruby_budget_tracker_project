@@ -10,14 +10,22 @@ require_relative ('../models/transaction')
 require_relative ('../models/budget')
 also_reload('../models/*')
 
-
+# index
 get '/transactions/?' do
-@transactions = Transaction.all()
-@merchants = Merchant.all()
-@categories = Category.all()
-erb(:"transactions/index")
+  @transactions = Transaction.all()
+  @merchants = Merchant.all()
+  @categories = Category.all()
+  erb(:"transactions/index")
 end
 
+get '/transactions/:id' do
+  @transaction = Transaction.find(params[:id].to_i)
+  @merchants = Merchant.all()
+  @categories = Category.all()
+  erb(:"transactions/show")
+end
+
+# edit
 get '/transactions/:id/edit' do
   @transaction = Transaction.find(params[:id].to_i)
   @merchants = Merchant.all()
@@ -25,23 +33,27 @@ get '/transactions/:id/edit' do
   erb(:"transactions/edit")
 end
 
+# destroy
 get '/transactions/:id/delete' do
   @transaction = Transaction.find(params[:id].to_i)
   @transaction.delete
   redirect to '/transactions'
 end
 
+# new
 get '/transactions/new' do
   @merchants = Merchant.all()
   @categories = Category.all()
   erb(:"transactions/new")
 end
 
+# create
 post '/transactions' do
   Transaction.new(params).save
   redirect to '/transactions'
 end
 
+# update
 post '/transactions/:id' do
   Transaction.new(params).update
   redirect to '/transactions'

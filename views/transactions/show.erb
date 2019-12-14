@@ -1,0 +1,17 @@
+<h3>Transaction Details</h3>
+<br>
+<ul>
+  <li>Merchant: <% for merchant in @merchants %>
+    <%= merchant.name.capitalize if @transaction.merchant_id == merchant.id %>
+    <% end %></li>
+  <li>Category: <% for category in @categories %>
+    <%= category.name.capitalize if @transaction.category_id == category.id %>
+    <% end %></li>
+  <li>Amount: £<%= @transaction.amount %></li>
+  <li>Time: <%= @transaction.time %></li>
+  <li>Date: <%= @transaction.date %></li>
+</ul>
+<br>
+<h3><a href="/transactions/<%= @transaction.id %>/edit">Edit</a></h3>
+<h3><a href="/transactions/<%= @transaction.id %>/delete">Delete</a></h3>
+<h3><a href="/transactions">Back to List</a></h3>

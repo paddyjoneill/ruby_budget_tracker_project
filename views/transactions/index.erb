@@ -7,7 +7,8 @@
      <%= category.name.capitalize if transaction.category_id == category.id %>
      <% end %> - £<%= transaction.amount %> - <%= transaction.time %> -
      <%= transaction.date %> -
-     <a href="/transactions/<%= transaction.id %>/edit">Edit</a>
+     <a href="/transactions/<%= transaction.id %>">Details</a>
+     - <a href="/transactions/<%= transaction.id %>/edit">Edit</a>
      -
      <a href="/transactions/<%= transaction.id %>/delete">Delete</a>
    </li>
