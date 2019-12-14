@@ -46,19 +46,20 @@ class TestTransaction < MiniTest::Test
   end
 
   def test_transaction_has_category
-
+    result = Category.find(@trans1.category_id)
+    assert_equal("transport", result.name)
   end
 
   def test_transaction_has_amount
-
+    assert_equal(10, @trans1.amount)
   end
 
   def test_transaction_has_time
-
+    assert_equal("13:00", @trans1.time)
   end
 
   def test_transaction_has_date
-
+    assert_equal("11/12/19", @trans1.date)
   end
 
 end

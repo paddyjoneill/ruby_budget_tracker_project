@@ -1,0 +1,5 @@
+<ul>
+  <% for transaction in @transactions %>
+  <li><% for merchant in @merchants %><%= merchant.name if transaction.merchant_id == merchant.id %><% end %> - <% for category in @categories %><%= category.name if transaction.category_id == category.id %><% end %> - £<%= transaction.amount %> - <%= transaction.time %> - <%= transaction.date %></li>
+  <% end %>
+</ul>
