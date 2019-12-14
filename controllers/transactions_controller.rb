@@ -18,6 +18,14 @@ get '/transactions/?' do
   erb(:"transactions/index")
 end
 
+# new
+get '/transactions/new' do
+  @merchants = Merchant.all()
+  @categories = Category.all()
+  erb(:"transactions/new")
+end
+
+# show
 get '/transactions/:id' do
   @transaction = Transaction.find(params[:id].to_i)
   @merchants = Merchant.all()
@@ -40,12 +48,7 @@ get '/transactions/:id/delete' do
   redirect to '/transactions'
 end
 
-# new
-get '/transactions/new' do
-  @merchants = Merchant.all()
-  @categories = Category.all()
-  erb(:"transactions/new")
-end
+
 
 # create
 post '/transactions' do

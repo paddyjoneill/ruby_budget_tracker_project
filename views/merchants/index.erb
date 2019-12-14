@@ -1,0 +1,11 @@
+<ul>
+  <% for merchant in @merchants %>
+    <li><%= merchant.name.capitalize %> -
+      <a href="/merchants/<%= merchant.id %>">Details</a> - 
+      <a href="/merchants/<%= merchant.id %>/edit">Edit</a>
+    </li>
+  <% end %>
+</ul>
+
+<br>
+<h3><a href="/merchants/new">Add a New Merchant</a></h3>

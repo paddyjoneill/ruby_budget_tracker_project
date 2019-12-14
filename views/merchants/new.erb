@@ -1,0 +1,23 @@
+<form method="POST" action="/merchants">
+  <div class="form-wrapper">
+
+    <div class="form-el">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name"/>
+    </div>
+
+    <div class="form-el">
+      <label for="category_select">Select Category:</label>
+      <select name="default_cat_id" id="category_select">
+        <% @categories.each do |category| %>
+            <option value=<%= category.id %>><%= category.name.capitalize %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form-el">
+      <input type="submit" value="Add Merchant"/>
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,11 @@
+<ul>
+  <li>Name: <%= @merchant.name.capitalize %></li>
+  <li>
+    Category: <% for category in @categories%>
+    <%= category.name.capitalize if category.id == @merchant.default_cat_id %>
+    <% end %>
+  </li>
+
+</ul>
+
+  <a href="/merchants/<%= @merchant.id %>/edit">Edit</a>
