@@ -1,0 +1,8 @@
+<ul>
+  <% for category in @categories %>
+    <li><%= category.name.capitalize %> -
+    <a href="/categories/<%= category.id %>/edit">Edit</a></li>
+  <% end %>
+</ul>
+
+<h3><a href="/categories/new">Add New Category</a></h3>
