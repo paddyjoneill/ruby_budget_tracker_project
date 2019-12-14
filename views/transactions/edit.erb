@@ -1,0 +1,46 @@
+<form method="POST" action="/transactions/<%= @transaction.id %>">
+  <div class="form-wrapper">
+
+    <div class="form-el">
+      <label for="merchant_select">Select Merchant:</label>
+      <select name="merchant_id" id="merchant_select">
+        <% @merchants.each do |merchant| %>
+            <option value="<%= merchant.id %>"
+              <%= "selected" if @transaction.merchant_id == merchant.id %>>
+              <%= merchant.name.capitalize %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form-el">
+      <label for="category_select">Select Category:</label>
+      <select name="category_id" id="category_select">
+        <% @categories.each do |category| %>
+            <option value="<%= category.id %>"
+              <%= "selected" if category.id == @transaction.category_id %>>
+              <%= category.name.capitalize %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form-el">
+      <label for="amount">Amount:</label>
+      <input value="<%= @transaction.amount %>" type="number" name="amount" id="amount"/>
+    </div>
+
+    <div class="form-el">
+      <label for="time">Time:</label>
+      <input value="<%= @transaction.time %>" type="time" name="time" id="time"/>
+    </div>
+
+    <div class="form-el">
+      <label for="date">Date:</label>
+      <input value="<%= @transaction.date %>" type="date" name="date" id="date"/>
+    </div>
+
+    <div class="form-el">
+      <input type="submit" value="Edit Transaction"/>
+    </div>
+
+  </div>
+</form>

@@ -45,7 +45,7 @@ Category.delete_all()
     'category_id' => @category1.id,
     'amount' => 10,
     'time' => '13:00',
-    'date' => '11/12/19'
+    'date' => '2019-12-11'
       }
     )
 @trans1.save()
@@ -55,7 +55,7 @@ Category.delete_all()
     'category_id' => @category2.id,
     'amount' => 20,
     'time' => '14:00',
-    'date' => '12/12/19'
+    'date' => '2019-12-12'
       }
     )
 @trans2.save()
@@ -65,7 +65,7 @@ Category.delete_all()
     'category_id' => @category3.id,
     'amount' => 30,
     'time' => '15:00',
-    'date' => '13/12/19'
+    'date' => '2019-12-13'
       }
     )
 @trans3.save()
