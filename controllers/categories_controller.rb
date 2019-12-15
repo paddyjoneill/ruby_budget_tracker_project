@@ -41,8 +41,6 @@ get '/categories/:id/delete' do
   redirect to '/categories'
 end
 
-
-
 # create
 post '/categories' do
   Category.new(params).save

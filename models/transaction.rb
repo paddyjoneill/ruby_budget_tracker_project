@@ -65,6 +65,13 @@ class Transaction
     SqlRunner.run( sql, values )
   end
 
+  def self.tranactions_total(transactions)
+    total = 0
+    for transaction in transactions
+      total += transaction.amount
+    end
+    return total
+  end
 
 
 

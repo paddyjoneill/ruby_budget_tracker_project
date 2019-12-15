@@ -15,13 +15,14 @@ get '/transactions/?' do
   @transactions = Transaction.all()
   @merchants = Merchant.all()
   @categories = Category.all()
+  @total = Transaction.tranactions_total(@transactions)
   erb(:"transactions/index")
 end
 
 # new
 get '/transactions/new' do
-  @merchants = Merchant.all()
-  @categories = Category.all()
+  @merchants = Merchant.all_active()
+  @categories = Category.all_active()
   erb(:"transactions/new")
 end
 
@@ -36,8 +37,8 @@ end
 # edit
 get '/transactions/:id/edit' do
   @transaction = Transaction.find(params[:id].to_i)
-  @merchants = Merchant.all()
-  @categories = Category.all()
+  @merchants = Merchant.all_active()
+  @categories = Category.all_active()
   erb(:"transactions/edit")
 end
 
@@ -47,8 +48,6 @@ get '/transactions/:id/delete' do
   @transaction.delete
   redirect to '/transactions'
 end
-
-
 
 # create
 post '/transactions' do

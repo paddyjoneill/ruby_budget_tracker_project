@@ -18,6 +18,18 @@
     </div>
 
     <div class="form-el">
+      <label for="active_select">Active:</label>
+      <select name="active" id="active_select">
+        <option value="true"
+        <%= "selected" if @merchant.active == true %>
+        >Active</option>
+        <option value="false"
+        <%= "selected" if @merchant.active == false %>
+        >Inactive</option>
+      </select>
+    </div>
+
+    <div class="form-el">
       <input type="submit" value="Edit Merchant"/>
     </div>
 

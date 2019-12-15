@@ -3,24 +3,25 @@ require_relative('../db/sqlrunner')
 class Category
 
   attr_reader :id
-  attr_accessor :name
+  attr_accessor :name, :active
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
+    @active = options['active']
   end
 
   def save()
     sql = "INSERT INTO categories
     (
-      name
+      name, active
     )
     VALUES
     (
-      $1
+      $1, $2
     )
     RETURNING id"
-    values = [@name]
+    values = [@name, @active]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
@@ -28,7 +29,29 @@ class Category
   def self.all()
     sql = "SELECT * FROM categories"
     results = SqlRunner.run( sql )
-    return results.map { |hash| Merchant.new( hash ) }
+    category_array = results.map { |hash| Category.new( hash ) }
+    for category in category_array
+      if category.active == "t"
+        category.active = true
+      else
+        category.active = false
+      end
+    end
+    return category_array
+  end
+
+  def self.all_active()
+    sql = "SELECT * FROM categories WHERE active = true"
+    results = SqlRunner.run( sql )
+    category_array = results.map { |hash| Category.new( hash ) }
+    for category in category_array
+      if category.active == "t"
+        category.active = true
+      else
+        category.active = false
+      end
+    end
+    return category_array
   end
 
   def self.find( id )
@@ -36,14 +59,20 @@ class Category
     WHERE id = $1"
     values = [id]
     results = SqlRunner.run( sql, values )
-    return Category.new( results.first )
+    category = Category.new( results.first )
+    if category.active == "t"
+      category.active = true
+    else
+      category.active = false
+    end
+    return category
   end
 
   def update()
     sql = " UPDATE categories SET
-      name = $1
-     WHERE id = $2;"
-    values = [@name, @id]
+      (name, active) = ( $1, $2)
+     WHERE id = $3;"
+    values = [@name, @active, @id]
     SqlRunner.run(sql, values)
   end
 

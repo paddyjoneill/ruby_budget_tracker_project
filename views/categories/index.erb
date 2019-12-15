@@ -1,6 +1,11 @@
 <ul>
   <% for category in @categories %>
     <li><%= category.name.capitalize %> -
+      <%= if category.active == true
+            "Active"
+          else
+            "Inactive"
+          end %> -
     <a href="/categories/<%= category.id %>/edit">Edit</a></li>
   <% end %>
 </ul>

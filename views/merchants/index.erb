@@ -1,7 +1,12 @@
 <ul>
   <% for merchant in @merchants %>
     <li><%= merchant.name.capitalize %> -
-      <a href="/merchants/<%= merchant.id %>">Details</a> - 
+      <%= if merchant.active == true
+            "Active"
+          else
+            "Inactive"
+          end %>
+      <a href="/merchants/<%= merchant.id %>">Details</a> -
       <a href="/merchants/<%= merchant.id %>/edit">Edit</a>
     </li>
   <% end %>

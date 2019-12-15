@@ -1,5 +1,10 @@
 <ul>
   <li>Name: <%= @merchant.name.capitalize %></li>
+  <li>    <%= if @merchant.active == true
+                  "Active"
+                else
+                  "Inactive"
+                end %></li>
   <li>
     Category: <% for category in @categories%>
     <%= category.name.capitalize if category.id == @merchant.default_cat_id %>
