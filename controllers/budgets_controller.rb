@@ -29,5 +29,18 @@ get '/budgets/?' do
   @previousmonthyear = params['month'].to_i == 1 ? params['year'].to_i - 1 : params['year']
   @nextmonthyear = params['month'].to_i == 12 ? params['year'].to_i + 1 : params['year']
 
+  @budgetremaining = @budget.monthly_budget - @total
+
   erb(:"budgets/index")
+end
+
+get '/budgets/edit' do
+  @budget = Budget.all()
+  erb(:"budgets/edit")
+end
+
+post '/budgets/:id' do
+  budget = Budget.new(params)
+  budget.update
+  redirect to '/budgets'
 end

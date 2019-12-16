@@ -8,8 +8,9 @@ class Budget
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @income = options['income'].to_i
-    @monthly_budget = options['monthly_budget'].to_i
     @target = options['target'].to_i
+    @monthly_budget = @income - @target
+
   end
 
   def save()
@@ -40,6 +41,11 @@ class Budget
      WHERE id = $4;"
     values = [@monthly_budget, @target, @income, @id]
     SqlRunner.run(sql, values)
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM budgets"
+    SqlRunner.run(sql)
   end
 
 

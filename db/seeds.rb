@@ -10,6 +10,7 @@ require 'pry'
 Transaction.delete_all()
 Merchant.delete_all()
 Category.delete_all()
+Budget.delete_all()
 
 @category1 = Category.new({
   'name' => 'transport',
@@ -81,7 +82,7 @@ Category.delete_all()
 @trans3.save()
 
 @budget1 = Budget.new(
-  { 'monthly_budget' => 400,
+  {
     'target' => 250,
     'income' => 1500
   }

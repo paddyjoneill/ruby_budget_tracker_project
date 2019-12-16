@@ -1,0 +1,20 @@
+<form method="POST" action="/budgets/<%= @budget.id %>">
+  <div class="form-wrapper">
+
+        <div class="form-el">
+          <label for="income">Monthly Income:</label>
+          <input value="<%= @budget.income %>" type="number" name="income" id="income"/>
+        </div>
+
+
+        <div class="form-el">
+          <label for="target">Saving Target:</label>
+          <input value="<%= @budget.target %>" type="number" name="target" id="target"/>
+        </div>
+
+        <div class="form-el">
+          <input type="submit" value="Edit Budgeting"/>
+        </div>
+
+      </div>
+    </form>
