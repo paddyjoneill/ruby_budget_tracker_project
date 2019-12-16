@@ -1,2 +1,21 @@
+<ul>
+  <% for transaction in @transactions %>
+  <li><% for merchant in @merchants %>
+    <%= merchant.name if transaction.merchant_id == merchant.id %>
+    <% end %>
+     - <% for category in @categories %>
+     <%= category.name.capitalize if transaction.category_id == category.id %>
+     <% end %> - £<%= transaction.amount %>  -
+     <%= transaction.date %> -
+     <a href="/transactions/<%= transaction.id %>">Details</a>
+     - <a href="/transactions/<%= transaction.id %>/edit">Edit</a>
+     -
+     <a href="/transactions/<%= transaction.id %>/delete">Delete</a>
+   </li>
+
+  <% end %>
+</ul>
+<p>Total: £<%= @total %></p>
+
 <h3>Monthly Budget: £<%= @budget.monthly_budget %></h3>
 <h3>Savings Target: £<%= @budget.target %></h3>

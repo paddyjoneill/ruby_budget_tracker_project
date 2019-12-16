@@ -41,6 +41,19 @@ class Transaction
     return results_array
   end
 
+  def self.month(month, year)
+    sql = "SELECT * FROM transactions
+            WHERE EXTRACT(MONTH from date) = $1
+            AND EXTRACT(YEAR from date) = $2;"
+    values = [month, year]
+    results = SqlRunner.run( sql ,values)
+    results_array = results.map { |hash| Transaction.new( hash ) }
+    for result in results_array
+      result.date = Date.parse result.date
+    end
+    return results_array
+  end
+
   def self.find( id )
     sql = "SELECT * FROM transactions
     WHERE id = $1"
