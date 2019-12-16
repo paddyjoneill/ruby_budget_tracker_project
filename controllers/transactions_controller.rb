@@ -22,7 +22,7 @@ get '/transactions/?' do
     @transactions = Transaction.all()
   end
 
-  @total = Transaction.tranactions_total(@transactions)
+  @total = Transaction.transactions_total(@transactions)
 
   @month = params['month'].to_i
   @previousmonth = params['month'].to_i == 1 ? 12 : params['month'].to_i - 1
@@ -67,11 +67,11 @@ end
 # create
 post '/transactions' do
   Transaction.new(params).save
-  redirect to '/transactions'
+  redirect to "/transactions?month=#{Date.today.month}&year=#{Date.today.year}"
 end
 
 # update
 post '/transactions/:id' do
   Transaction.new(params).update
-  redirect to '/transactions'
+  redirect to "/transactions?month=#{Date.today.month}&year=#{Date.today.year}"
 end

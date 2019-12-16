@@ -20,7 +20,7 @@ get '/budgets/?' do
   else
     @transactions = Transaction.all()
   end
-  @total = Transaction.tranactions_total(@transactions)
+  @total = Transaction.transactions_total(@transactions)
 
   @month = params['month'].to_i
   @previousmonth = params['month'].to_i == 1 ? 12 : params['month'].to_i - 1
@@ -42,5 +42,5 @@ end
 post '/budgets/:id' do
   budget = Budget.new(params)
   budget.update
-  redirect to '/budgets'
+  redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
 end

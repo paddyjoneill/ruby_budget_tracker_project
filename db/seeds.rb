@@ -30,6 +30,18 @@ Budget.delete_all()
   })
 @category3.save()
 
+@category4 = Category.new({
+  'name' => 'utilities',
+  'active' => true
+  })
+@category4.save()
+
+@category5 = Category.new({
+  'name' => 'council tax',
+  'active' => true
+  })
+@category5.save()
+
 @merchant1 = Merchant.new({
   'name' => 'ScotRail',
   'default_cat_id' => @category1.id,
@@ -50,6 +62,20 @@ Budget.delete_all()
   'active' => true
   })
 @merchant3.save()
+
+@merchant4 = Merchant.new({
+  'name' => 'Scottish Gas',
+  'default_cat_id' => @category4.id,
+  'active' => true
+  })
+@merchant4.save()
+
+@merchant5 = Merchant.new({
+  'name' => 'Edinburgh Council',
+  'default_cat_id' => @category5.id,
+  'active' => true
+  })
+@merchant5.save()
 
 @trans1 = Transaction.new(
   { 'merchant_id' => @merchant1.id,
@@ -74,17 +100,37 @@ Budget.delete_all()
 @trans3 = Transaction.new(
   { 'merchant_id' => @merchant3.id,
     'category_id' => @category3.id,
-    'amount' => 30,
+    'amount' => 500,
     'time' => '15:00',
     'date' => Date.parse("2019-12-13")
       }
     )
 @trans3.save()
 
+@trans4 = Transaction.new(
+  { 'merchant_id' => @merchant4.id,
+    'category_id' => @category4.id,
+    'amount' => 120,
+    'time' => '15:00',
+    'date' => Date.parse("2019-12-5")
+      }
+    )
+@trans4.save()
+
+@trans5 = Transaction.new(
+  { 'merchant_id' => @merchant5.id,
+    'category_id' => @category5.id,
+    'amount' => 140,
+    'time' => '15:00',
+    'date' => Date.parse("2019-12-1")
+      }
+    )
+@trans5.save()
+
 @budget1 = Budget.new(
   {
     'target' => 250,
-    'income' => 1500
+    'income' => 2000
   }
 )
 @budget1.save()

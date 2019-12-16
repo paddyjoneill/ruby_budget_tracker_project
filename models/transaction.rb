@@ -32,7 +32,8 @@ class Transaction
   end
 
   def self.all()
-    sql = "SELECT * FROM transactions"
+    sql = "SELECT * FROM transactions
+            ORDER BY date;"
     results = SqlRunner.run( sql )
     results_array = results.map { |hash| Transaction.new( hash ) }
     for result in results_array
@@ -44,7 +45,8 @@ class Transaction
   def self.month(month, year)
     sql = "SELECT * FROM transactions
             WHERE EXTRACT(MONTH from date) = $1
-            AND EXTRACT(YEAR from date) = $2;"
+            AND EXTRACT(YEAR from date) = $2
+            ORDER BY date;"
     values = [month, year]
     results = SqlRunner.run( sql ,values)
     results_array = results.map { |hash| Transaction.new( hash ) }
@@ -85,7 +87,7 @@ class Transaction
     SqlRunner.run( sql, values )
   end
 
-  def self.tranactions_total(transactions)
+  def self.transactions_total(transactions)
     total = 0
     for transaction in transactions
       total += transaction.amount
