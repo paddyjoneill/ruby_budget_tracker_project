@@ -5,7 +5,7 @@
     <% end %>
      - <% for category in @categories %>
      <%= category.name.capitalize if transaction.category_id == category.id %>
-     <% end %> - £<%= transaction.amount %> - <%= transaction.time %> -
+     <% end %> - £<%= transaction.amount %>  -
      <%= transaction.date %> -
      <a href="/transactions/<%= transaction.id %>">Details</a>
      - <a href="/transactions/<%= transaction.id %>/edit">Edit</a>
