@@ -33,5 +33,5 @@ CREATE TABLE transactions
   category_id INT references categories(id),
   amount INT,
   time VARCHAR(255),
-  date VARCHAR(255)
+  date DATE
 );

@@ -4,7 +4,8 @@ require_relative('./category')
 
 class Transaction
 
-  attr_reader :id, :merchant_id, :category_id, :amount, :time, :date
+  attr_reader :id, :merchant_id, :category_id, :amount, :time
+  attr_accessor :date
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -33,7 +34,11 @@ class Transaction
   def self.all()
     sql = "SELECT * FROM transactions"
     results = SqlRunner.run( sql )
-    return results.map { |hash| Transaction.new( hash ) }
+    results_array = results.map { |hash| Transaction.new( hash ) }
+    for result in results_array
+      result.date = Date.parse result.date
+    end
+    return results_array
   end
 
   def self.find( id )
@@ -41,7 +46,9 @@ class Transaction
     WHERE id = $1"
     values = [id]
     results = SqlRunner.run( sql, values )
-    return Transaction.new( results.first )
+    result = Transaction.new( results.first )
+    result.date = Date.parse result.date
+    return result
   end
 
   def update()

@@ -4,6 +4,8 @@ require_relative('../models/category')
 require_relative('../models/transaction')
 require_relative('../models/budget')
 
+require 'pry'
+
 
 Transaction.delete_all()
 Merchant.delete_all()
@@ -53,7 +55,7 @@ Category.delete_all()
     'category_id' => @category1.id,
     'amount' => 10,
     'time' => '13:00',
-    'date' => '2019-12-11'
+    'date' => Date.parse("2019-11-11")
       }
     )
 @trans1.save()
@@ -63,7 +65,7 @@ Category.delete_all()
     'category_id' => @category2.id,
     'amount' => 20,
     'time' => '14:00',
-    'date' => '2019-12-12'
+    'date' => Date.parse("2019-12-12")
       }
     )
 @trans2.save()
@@ -73,7 +75,7 @@ Category.delete_all()
     'category_id' => @category3.id,
     'amount' => 30,
     'time' => '15:00',
-    'date' => '2019-12-13'
+    'date' => Date.parse("2019-12-13")
       }
     )
 @trans3.save()
@@ -85,3 +87,6 @@ Category.delete_all()
   }
 )
 @budget1.save()
+
+binding.pry
+nil
