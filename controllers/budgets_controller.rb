@@ -20,8 +20,14 @@ get '/budgets/?' do
   else
     @transactions = Transaction.all()
   end
-
   @total = Transaction.tranactions_total(@transactions)
+
+  @month = params['month'].to_i
+  @previousmonth = params['month'].to_i == 1 ? 12 : params['month'].to_i - 1
+  @nextmonth = params['month'].to_i == 12 ? 1 : params['month'].to_i + 1
+  @year = params['year'].to_i
+  @previousmonthyear = params['month'].to_i == 1 ? params['year'].to_i - 1 : params['year']
+  @nextmonthyear = params['month'].to_i == 12 ? params['year'].to_i + 1 : params['year']
 
   erb(:"budgets/index")
 end
