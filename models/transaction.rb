@@ -56,6 +56,36 @@ class Transaction
     return results_array
   end
 
+  def self.month_category(month, year, category_id)
+    sql = "SELECT * FROM transactions
+            WHERE EXTRACT(MONTH from date) = $1
+            AND EXTRACT(YEAR from date) = $2
+            AND category_id = $3
+            ORDER BY date;"
+    values = [month, year, category]
+    results = SqlRunner.run( sql ,values)
+    results_array = results.map { |hash| Transaction.new( hash ) }
+    for result in results_array
+      result.date = Date.parse result.date
+    end
+    return results_array
+  end
+
+  def self.month_merchant(month, year, merchant_id)
+    sql = "SELECT * FROM transactions
+            WHERE EXTRACT(MONTH from date) = $1
+            AND EXTRACT(YEAR from date) = $2
+            AND merchant_id = $3
+            ORDER BY date;"
+    values = [month, year, merchant_id]
+    results = SqlRunner.run( sql ,values)
+    results_array = results.map { |hash| Transaction.new( hash ) }
+    for result in results_array
+      result.date = Date.parse result.date
+    end
+    return results_array
+  end
+
   def self.find( id )
     sql = "SELECT * FROM transactions
     WHERE id = $1"

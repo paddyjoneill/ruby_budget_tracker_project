@@ -14,4 +14,4 @@
 <br>
 <h3><a href="/transactions/<%= @transaction.id %>/edit">Edit</a></h3>
 <h3><a href="/transactions/<%= @transaction.id %>/delete">Delete</a></h3>
-<h3><a href="/transactions">Back to List</a></h3>
+<h3><a href="/transactions?month=<%= @transaction.date.month %>&year=<%= @transaction.date.year %>">Back to List</a></h3>
