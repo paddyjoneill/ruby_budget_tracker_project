@@ -42,6 +42,12 @@ Budget.delete_all()
   })
 @category5.save()
 
+@category6 = Category.new({
+  'name' => 'groceries',
+  'active' => true
+  })
+@category6.save()
+
 @merchant1 = Merchant.new({
   'name' => 'ScotRail',
   'default_cat_id' => @category1.id,
@@ -76,6 +82,43 @@ Budget.delete_all()
   'active' => true
   })
 @merchant5.save()
+
+@merchant6 = Merchant.new({
+  'name' => 'Chanter',
+  'default_cat_id' => @category2.id,
+  'active' => true
+  })
+@merchant6.save()
+
+@merchant7 = Merchant.new({
+  'name' => 'Peppers',
+  'default_cat_id' => @category2.id,
+  'active' => true
+  })
+@merchant7.save()
+
+@merchant8 = Merchant.new({
+  'name' => 'Lothian Buses',
+  'default_cat_id' => @category1.id,
+  'active' => true
+  })
+@merchant8.save()
+
+@merchant9 = Merchant.new({
+  'name' => 'Easyjet',
+  'default_cat_id' => @category1.id,
+  'active' => true
+  })
+@merchant9.save()
+
+@merchant9 = Merchant.new({
+  'name' => 'Scotmid',
+  'default_cat_id' => @category6.id,
+  'active' => true
+  })
+@merchant9.save()
+
+
 
 @trans1 = Transaction.new(
   { 'merchant_id' => @merchant1.id,
@@ -127,6 +170,36 @@ Budget.delete_all()
     )
 @trans5.save()
 
+@trans6 = Transaction.new(
+  { 'merchant_id' => @merchant9.id,
+    'category_id' => @category6.id,
+    'amount' => 57,
+    'time' => '13:00',
+    'date' => Date.parse("2019-12-08")
+      }
+    )
+@trans6.save()
+
+@trans7 = Transaction.new(
+  { 'merchant_id' => @merchant8.id,
+    'category_id' => @category1.id,
+    'amount' => 157,
+    'time' => '13:00',
+    'date' => Date.parse("2019-12-05")
+      }
+    )
+@trans7.save()
+
+@trans8 = Transaction.new(
+  { 'merchant_id' => @merchant7.id,
+    'category_id' => @category2.id,
+    'amount' => 9,
+    'time' => '13:00',
+    'date' => Date.parse("2019-12-07")
+      }
+    )
+@trans8.save()
+
 @budget1 = Budget.new(
   {
     'target' => 250,
@@ -134,6 +207,3 @@ Budget.delete_all()
   }
 )
 @budget1.save()
-
-binding.pry
-nil
