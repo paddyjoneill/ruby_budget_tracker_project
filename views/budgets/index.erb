@@ -26,7 +26,31 @@
 </ul>
 <p>Total: £<%= @total %></p>
 
+<% if params['category_id'] == nil %>
 <h3>Remaining Monthly Budget: £<%= @budgetremaining %></h3>
 <h3>Income: £<%= @budget.income %></h3>
 <h3>Savings Target: £<%= @budget.target %></h3>
 <h3><a href="/budgets/edit">Edit Budgeting</a></h3>
+<% end %>
+
+<form method="get" action="/budgets">
+  <div class="form-wrapper">
+
+    <div class="form-el">
+      <label for="category_select">Filter by:</label>
+      <select name="category_id" id="category_select">
+        <% @categories.each do |category| %>
+            <option value=<%= category.id %>><%= category.name.capitalize %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <input type="hidden" id="month" name="month" value="<%= @date.month %>">
+    <input type="hidden" id="year" name="year" value="<%= @date.year %>">
+
+    <div class="form-el">
+      <input type="submit" value="Filter"/>
+    </div>
+
+  </div>
+</form>

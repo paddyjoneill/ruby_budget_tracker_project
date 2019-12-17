@@ -14,11 +14,11 @@ get '/budgets/?' do
   @budget = Budget.all()
   @merchants = Merchant.all()
   @categories = Category.all()
-
-  if params['month'] == nil
-    redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
-  else
+  if params['category_id'] == nil
     @transactions = Transaction.month(params['month'],params['year'])
+  else
+    @transactions = Transaction.month_category(params['month'],params['year'],params['category_id'])
+  end
 
     @total = Transaction.transactions_total(@transactions)
 
@@ -27,7 +27,7 @@ get '/budgets/?' do
     @nextmonth = @date >> 1
 
     @budgetremaining = @budget.monthly_budget - @total
-  end
+
   erb(:"budgets/index")
 end
 
@@ -41,3 +41,7 @@ post '/budgets/:id' do
   budget.update
   redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
 end
+
+# post '/budgets' do
+#
+# end

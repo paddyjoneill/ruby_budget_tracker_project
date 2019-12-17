@@ -1,0 +1,18 @@
+<form method="get" action="/transactions">
+  <div class="form-wrapper">
+
+    <div class="form-el">
+      <label for="category_select">Filter by:</label>
+      <select name="default_cat_id" id="category_select">
+        <% @categories.each do |category| %>
+            <option value=<%= category.id %>><%= category.name.capitalize %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form-el">
+      <input type="submit" value="Filter"/>
+    </div>
+
+  </div>
+</form>

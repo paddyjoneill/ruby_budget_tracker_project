@@ -62,7 +62,7 @@ class Transaction
             AND EXTRACT(YEAR from date) = $2
             AND category_id = $3
             ORDER BY date;"
-    values = [month, year, category]
+    values = [month, year, category_id]
     results = SqlRunner.run( sql ,values)
     results_array = results.map { |hash| Transaction.new( hash ) }
     for result in results_array
@@ -123,6 +123,17 @@ class Transaction
       total += transaction.amount
     end
     return total
+  end
+
+  def self.recurring_bill(options)
+    @date = Date.parse(options['date'])
+    @end_date = Date.parse(options['end_date'])
+    while @date < @end_date
+      options['date'] = @date
+      bill = Transaction.new(options)
+      bill.save()
+      @date = @date >> 1
+    end
   end
 
 
