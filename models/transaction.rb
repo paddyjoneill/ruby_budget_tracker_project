@@ -126,6 +126,7 @@ class Transaction
   end
 
   def self.recurring_bill(options)
+    # binding.pry
     @date = Date.parse(options['date'])
     @end_date = Date.parse(options['end_date'])
     while @date < @end_date

@@ -63,7 +63,12 @@ end
 
 # create
 post '/transactions' do
-  Transaction.new(params).save
+  # binding.pry
+  if params['bill'] != nil
+    Transaction.recurring_bill(params)
+  else
+    Transaction.new(params).save
+  end
   redirect to "/transactions?month=#{Date.today.month}&year=#{Date.today.year}"
 end
 

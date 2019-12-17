@@ -10,29 +10,24 @@
       </select>
     </div>
 
-    <!-- <div class="form-el">
-      <label for="category_select">Select Category:</label>
-      <select name="category_id" id="category_select">
-        <% @categories.each do |category| %>
-            <option value=<%= category.id %>><%= category.name.capitalize %></option>
-        <% end %>
-      </select>
-    </div> -->
-
     <div class="form-el">
       <label for="amount">Amount:</label>
       <input type="number" name="amount" id="amount"/>
     </div>
 
-    <!-- <div class="form-el">
-      <label for="time">Time:</label>
-      <input value="12:00" type="time" name="time" id="time"/>
-    </div> -->
-
     <div class="form-el">
       <label for="date">Date:</label>
       <input value="<%= Date.today %>" type="date" name="date" id="date"/>
     </div>
+
+    <% if params['bill'] != nil %>
+      <div class="form-el">
+        <label for="end_date">End Date:</label>
+        <input value="<%= Date.today %>" type="date" name="end_date" id="end_date"/>
+      </div>
+
+      <input type="hidden" id="bill" name="bill" value="true">
+    <% end %>
 
     <div class="form-el">
       <input type="submit" value="Add Transaction"/>
