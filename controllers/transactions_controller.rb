@@ -58,7 +58,7 @@ end
 get '/transactions/:id/delete' do
   @transaction = Transaction.find(params[:id].to_i)
   @transaction.delete
-  redirect to '/transactions'
+  redirect to '/budgets'
 end
 
 # create
@@ -69,11 +69,11 @@ post '/transactions' do
   else
     Transaction.new(params).save
   end
-  redirect to "/transactions?month=#{Date.today.month}&year=#{Date.today.year}"
+  redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
 end
 
 # update
 post '/transactions/:id' do
   Transaction.new(params).update
-  redirect to "/transactions?month=#{Date.today.month}&year=#{Date.today.year}"
+  redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
 end

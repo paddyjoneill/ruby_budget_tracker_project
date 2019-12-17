@@ -30,7 +30,6 @@
 <h3>Remaining Monthly Budget: £<%= @budgetremaining %></h3>
 <h3>Income: £<%= @budget.income %></h3>
 <h3>Savings Target: £<%= @budget.target %></h3>
-<h3><a href="/budgets/edit">Edit Budgeting</a></h3>
 <% end %>
 
 <form method="get" action="/budgets">
@@ -43,14 +42,16 @@
             <option value=<%= category.id %>><%= category.name.capitalize %></option>
         <% end %>
       </select>
-    </div>
 
     <input type="hidden" id="month" name="month" value="<%= @date.month %>">
     <input type="hidden" id="year" name="year" value="<%= @date.year %>">
 
-    <div class="form-el">
       <input type="submit" value="Filter"/>
     </div>
 
   </div>
+
+  <h3><a href="/transactions/new">Add New Transaction</a></h3>
+  <h3><a href="/transactions/new?bill=true">Add New Bill</a></h3>
+  <h3><a href="/budgets/edit">Edit Budgeting</a></h3>
 </form>
