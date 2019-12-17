@@ -15,19 +15,19 @@ get '/budgets/?' do
   @merchants = Merchant.all()
   @categories = Category.all()
 
-  if params['month'] != nil
-    @transactions = Transaction.month(params['month'],params['year'])
+  if params['month'] == nil
+    redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
   else
-    @transactions = Transaction.all()
+    @transactions = Transaction.month(params['month'],params['year'])
+
+    @total = Transaction.transactions_total(@transactions)
+
+    @date = Date.new(params['year'].to_i,params['month'].to_i,1)
+    @prevmonth = @date << 1
+    @nextmonth = @date >> 1
+
+    @budgetremaining = @budget.monthly_budget - @total
   end
-  @total = Transaction.transactions_total(@transactions)
-
-  @date = Date.new(params['year'].to_i,params['month'].to_i,1)
-  @prevmonth = @date << 1
-  @nextmonth = @date >> 1
-  
-  @budgetremaining = @budget.monthly_budget - @total
-
   erb(:"budgets/index")
 end
 

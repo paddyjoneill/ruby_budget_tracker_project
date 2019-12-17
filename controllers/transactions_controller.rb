@@ -16,17 +16,17 @@ get '/transactions/?' do
   @merchants = Merchant.all()
   @categories = Category.all()
 
-  if params['month'] != nil
-    @transactions = Transaction.month(params['month'],params['year'])
+
+  if params['month'] == nil
+    redirect to "/transactions?month=#{Date.today.month}&year=#{Date.today.year}"
   else
-    @transactions = Transaction.all()
+    @transactions = Transaction.month(params['month'],params['year'])
+    @date = Date.new(params['year'].to_i,params['month'].to_i,1)
+    @prevmonth = @date << 1
+    @nextmonth = @date >> 1
+
+    @total = Transaction.transactions_total(@transactions)
   end
-
-  @total = Transaction.transactions_total(@transactions)
-
-  @date = Date.new(params['year'].to_i,params['month'].to_i,1)
-  @prevmonth = @date << 1
-  @nextmonth = @date >> 1
 
   erb(:"transactions/index")
 end
