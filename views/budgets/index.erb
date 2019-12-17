@@ -8,6 +8,15 @@
  </h3>
 
 <table>
+  <tr>
+    <th>Merchant</th>
+    <th>Category</th>
+    <th>Amount</th>
+    <th>Date</th>
+    <th> </th>
+    <th> </th>
+    <th> </th>
+  </tr>
   <% for transaction in @transactions %>
   <tr><% for merchant in @merchants %>
     <%= "<th>#{merchant.name}</th>" if transaction.merchant_id == merchant.id %>

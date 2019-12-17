@@ -8,16 +8,31 @@
 ul {
   list-style-type: none;
   margin: 20px;
-  padding: 12px;
+  padding: 20px;
   background-color: #696D7D;
 }
 
 li{
     display: inline;
+    margin: 20px;
 }
 
 li a {
   display: inline;
   text-decoration: none;
   background-color: #696D7D;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border-bottom: : 2px solid black;
+}
+
+th, td {
+  padding-left: 12px;
+  padding-right: 12px;
+  text-align: left;
 }
