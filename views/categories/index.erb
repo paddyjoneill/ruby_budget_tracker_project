@@ -1,13 +1,17 @@
-<ul>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Status</th>
+  </tr>
   <% for category in @categories %>
-    <li><%= category.name.capitalize %> -
+    <tr><%= "<th>#{category.name.capitalize}</th>" %>
       <%= if category.active == true
-            "Active"
+            "<th>Active</th>"
           else
-            "Inactive"
-          end %> -
-    <a href="/categories/<%= category.id %>/edit">Edit</a></li>
+            "<th>Inactive</th>"
+          end %>
+    <th><a href="/categories/<%= category.id %>/edit">Edit</a></th></tr>
   <% end %>
-</ul>
+</table>
 
 <h3><a href="/categories/new">Add New Category</a></h3>

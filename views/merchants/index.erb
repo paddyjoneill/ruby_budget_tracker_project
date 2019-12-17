@@ -1,16 +1,21 @@
-<ul>
+<table>
+  <tr>
+    <th>Merchant Name</th>
+    <th>Status</th>
+  </tr>
   <% for merchant in @merchants %>
-    <li><%= merchant.name.capitalize %> -
+    <tr>
+    <%= "<th>#{merchant.name.capitalize}</th>" %>
       <%= if merchant.active == true
-            "Active"
+            "<th>Active</th>"
           else
-            "Inactive"
+            "<th>Inactive</th>"
           end %>
-      <a href="/merchants/<%= merchant.id %>">Details</a> -
-      <a href="/merchants/<%= merchant.id %>/edit">Edit</a>
-    </li>
+      <th><a href="/merchants/<%= merchant.id %>">Details</a></th>
+      <th><a href="/merchants/<%= merchant.id %>/edit">Edit</a></th>
+    </tr>
   <% end %>
-</ul>
+</table>
 
 <br>
 <h3><a href="/merchants/new">Add a New Merchant</a></h3>
