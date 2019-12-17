@@ -7,23 +7,23 @@
    ">Next Month</a>
  </h3>
 
-<ul>
+<table>
   <% for transaction in @transactions %>
-  <li><% for merchant in @merchants %>
-    <%= merchant.name if transaction.merchant_id == merchant.id %>
+  <tr><% for merchant in @merchants %>
+    <%= "<th>#{merchant.name}</th>" if transaction.merchant_id == merchant.id %>
     <% end %>
-     - <% for category in @categories %>
-     <%= category.name.capitalize if transaction.category_id == category.id %>
-     <% end %> - £<%= transaction.amount %>  -
-     <%= transaction.date %> -
-     <a href="/transactions/<%= transaction.id %>">Details</a>
-     - <a href="/transactions/<%= transaction.id %>/edit">Edit</a>
-     -
-     <a href="/transactions/<%= transaction.id %>/delete">Delete</a>
-   </li>
+     <% for category in @categories %>
+     <%= "<th>#{category.name.capitalize}</th>" if transaction.category_id == category.id %>
+     <% end %>
+     <th>£<%= transaction.amount %></th>
+     <th><%= transaction.date %></th>
+     <th><a href="/transactions/<%= transaction.id %>">Details</a></th>
+     <th><a href="/transactions/<%= transaction.id %>/edit">Edit</a></th>
+     <th><a href="/transactions/<%= transaction.id %>/delete">Delete</a></th>
+   </tr>
 
   <% end %>
-</ul>
+</table>
 <p>Total: £<%= @total %></p>
 
 <% if params['category_id'] == nil %>
