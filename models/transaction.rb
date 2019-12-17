@@ -10,7 +10,7 @@ class Transaction
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @merchant_id = options['merchant_id'].to_i
-    @category_id = options['category_id'].to_i
+    @category_id = Merchant.find(@merchant_id).default_cat_id.to_i
     @amount = options['amount'].to_i
     @time = options['time']
     @date = options['date']

@@ -1,9 +1,9 @@
 <h3>
   <a href="/budgets?month=
-  <%= @previousmonth %>&year=<%= @previousmonthyear %>
+  <%= @prevmonth.month %>&year=<%= @prevmonth.year %>
   ">Previous Month</a>
-   - <%= Date::MONTHNAMES[@month] %> - <%= @year %> -
-   <a href="/budgets?month=<%= @nextmonth %>&year=<%= @nextmonthyear %>
+   - <%= Date::MONTHNAMES[@date.month] %> - <%= @date.year %> -
+   <a href="/budgets?month=<%= @nextmonth.month %>&year=<%= @nextmonth.year %>
    ">Next Month</a>
  </h3>
 

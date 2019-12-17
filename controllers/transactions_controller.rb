@@ -24,12 +24,9 @@ get '/transactions/?' do
 
   @total = Transaction.transactions_total(@transactions)
 
-  @month = params['month'].to_i
-  @previousmonth = params['month'].to_i == 1 ? 12 : params['month'].to_i - 1
-  @nextmonth = params['month'].to_i == 12 ? 1 : params['month'].to_i + 1
-  @year = params['year'].to_i
-  @previousmonthyear = params['month'].to_i == 1 ? params['year'].to_i - 1 : params['year']
-  @nextmonthyear = params['month'].to_i == 12 ? params['year'].to_i + 1 : params['year']
+  @date = Date.new(params['year'].to_i,params['month'].to_i,1)
+  @prevmonth = @date << 1
+  @nextmonth = @date >> 1
 
   erb(:"transactions/index")
 end

@@ -1,10 +1,10 @@
 
 <h3>
   <a href="/transactions?month=
-  <%= @previousmonth %>&year=<%= @previousmonthyear %>
+  <%= @prevmonth.month %>&year=<%= @prevmonth.year %>
   ">Previous Month</a>
-   - <%= Date::MONTHNAMES[@month] %> - <%= @year %> -
-   <a href="/transactions?month=<%= @nextmonth %>&year=<%= @nextmonthyear %>
+   - <%= Date::MONTHNAMES[@date.month] %> - <%= @date.year %> -
+   <a href="/transactions?month=<%= @nextmonth.month %>&year=<%= @nextmonth.year %>
    ">Next Month</a>
  </h3>
 
@@ -28,4 +28,4 @@
 </ul>
 <p>Total: £<%= @total %></p>
 <h3><a href="/transactions/new">Add New Transaction</a></h3>
-<h3><a href="/budgets?month=<%= @month %>&year=<%= @year %>">View Budgeting</a></h3>
+<h3><a href="/budgets?month=<%= @date.month %>&year=<%= @date.year %>">View Budgeting</a></h3>
