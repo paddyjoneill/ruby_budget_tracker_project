@@ -1,3 +1,5 @@
+<br>
+
 <form method="POST" action="/merchants/<%= @merchant.id %>">
   <div class="form-wrapper">
 
@@ -7,8 +9,8 @@
     </div>
 
     <div class="form-el">
-      <label for="category_select">Select Category:</label>
-      <select name="default_cat_id" id="category_select">
+      <label>Select Category:</label>
+      <select name="default_cat_id" class="dropdown">
         <% @categories.each do |category| %>
             <option value=<%= category.id %>
               <%= "selected" if category.id == @merchant.default_cat_id %>
@@ -18,8 +20,8 @@
     </div>
 
     <div class="form-el">
-      <label for="active_select">Active:</label>
-      <select name="active" id="active_select">
+      <label>Active:</label>
+      <select name="active" class="dropdown">
         <option value="true"
         <%= "selected" if @merchant.active == true %>
         >Active</option>
@@ -28,7 +30,7 @@
         >Inactive</option>
       </select>
     </div>
-
+<br>
     <div class="form-el">
       <input type="submit" value="Edit Merchant"/>
     </div>
