@@ -27,7 +27,8 @@
      <th>£<%= transaction.amount %></th>
      <th><%= transaction.date %></th>
      <th><a href="/transactions/<%= transaction.id %>">Details</a></th>
-     <th><a href="/transactions/<%= transaction.id %>/edit">Edit</a></th>
+     
+     <th><a href="/transactions/<%= transaction.id %>/edit<%= "?is_bill=true" if transaction.is_bill == true %>">Edit</a></th>
      <th><a href="/transactions/<%= transaction.id %>/delete">Delete</a></th>
    </tr>
 

@@ -5,8 +5,8 @@ require_relative('./bill')
 
 class Transaction
 
-  attr_reader :id, :merchant_id, :category_id, :amount, :time, :is_bill, :bill_id
-  attr_accessor :date
+  attr_reader :id, :merchant_id, :category_id, :amount, :time, :bill_id
+  attr_accessor :date, :is_bill
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -43,6 +43,11 @@ class Transaction
     results_array = results.map { |hash| Transaction.new( hash ) }
     for result in results_array
       result.date = Date.parse result.date
+      if result.is_bill == "t"
+        result.is_bill = true
+      else
+        result.is_bill = nil
+      end
     end
     return results_array
   end
@@ -58,6 +63,11 @@ class Transaction
     results_array = results.map { |hash| Transaction.new( hash ) }
     for result in results_array
       result.date = Date.parse result.date
+      if result.is_bill == "t"
+        result.is_bill = true
+      else
+        result.is_bill = nil
+      end
     end
     return results_array
   end
@@ -74,6 +84,11 @@ class Transaction
     results_array = results.map { |hash| Transaction.new( hash ) }
     for result in results_array
       result.date = Date.parse result.date
+      if result.is_bill == "t"
+        result.is_bill = true
+      else
+        result.is_bill = nil
+      end
     end
     return results_array
   end
@@ -90,6 +105,11 @@ class Transaction
     results_array = results.map { |hash| Transaction.new( hash ) }
     for result in results_array
       result.date = Date.parse result.date
+      if result.is_bill == "t"
+        result.is_bill = true
+      else
+        result.is_bill = nil
+      end
     end
     return results_array
   end
@@ -102,6 +122,11 @@ class Transaction
     results = SqlRunner.run( sql, values )
     result = Transaction.new( results.first )
     result.date = Date.parse result.date
+    if result.is_bill == "t"
+      result.is_bill = true
+    else
+      result.is_bill = nil
+    end
     return result
   end
 
@@ -151,13 +176,14 @@ class Transaction
   end
 
   def self.delete_bill(bill_id, date)
-    sql = "DELETE FROM transactions WHERE bill_id = $1 AND date > $2"
+    sql = "DELETE FROM transactions WHERE bill_id = $1 AND date >= $2"
     values = [bill_id, date]
     SqlRunner.run( sql, values )
   end
 
-  def self.update_bill(options, bill_id)
-    self.delete_bill(bill_id, options['date'])
+  def self.update_bill(options)
+    # binding.pry
+    self.delete_bill(options['bill_id'], options['date'])
     self.recurring_bill(options)
   end
 
