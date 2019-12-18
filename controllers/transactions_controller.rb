@@ -51,6 +51,7 @@ get '/transactions/:id/edit' do
   @transaction = Transaction.find(params[:id].to_i)
   @merchants = Merchant.all_active()
   @categories = Category.all_active()
+  @bill = Bill.find(@transaction.bill_id.to_i)
   erb(:"transactions/edit")
 end
 

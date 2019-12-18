@@ -32,9 +32,9 @@ class Bill
     return bill_array
   end
 
-  def self.find( id )
+  def self.find( bill_id )
     sql = "SELECT * FROM bills
-    WHERE id = $1"
+    WHERE bill_id = $1"
     values = [bill_id]
     results = SqlRunner.run( sql, values )
     bill = Bill.new( results.first )
@@ -43,7 +43,7 @@ class Bill
   def update()
     sql = " UPDATE bill SET
     end_date = $1
-     WHERE id = $2;"
+     WHERE bill_id = $2;"
     values = [@end_date, @bill_id]
     SqlRunner.run(sql, values)
   end
@@ -54,7 +54,7 @@ class Bill
   end
 
   def delete
-    sql = "DELETE FROM bills WHERE id = $1"
+    sql = "DELETE FROM bills WHERE bill_id = $1"
     values = [@bill_id]
     SqlRunner.run( sql, values )
   end

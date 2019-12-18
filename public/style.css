@@ -64,9 +64,9 @@ a  {
 
 }
 
-/* h3{
+h3.button {
   height: 40px;
   width: 300px;
   padding-top: 12px;
   border-radius: 10px;
-} */
+}
