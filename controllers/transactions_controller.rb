@@ -56,9 +56,9 @@ end
 
 # destroy
 get '/transactions/:id/delete' do
-  @transaction = Transaction.find(params[:id].to_i)
+  @transaction = Transaction.find(params['id'].to_i)
   @transaction.delete
-  redirect to '/budgets'
+  redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
 end
 
 # create

@@ -2,7 +2,7 @@
   <a href="/budgets?month=
   <%= @prevmonth.month %>&year=<%= @prevmonth.year %>
   ">Previous Month</a>
-   - <%= Date::MONTHNAMES[@date.month] %> - <%= @date.year %> -
+   - <%= Date::MONTHNAMES[@date.month] %> <%= @date.year %> -
    <a href="/budgets?month=<%= @nextmonth.month %>&year=<%= @nextmonth.year %>
    ">Next Month</a>
  </h3>
@@ -44,7 +44,7 @@
 <form method="get" action="/budgets">
   <div class="form-wrapper">
 
-    <div class="form-el">
+    <div class="custom-select" style="width:200px;">
       <label for="category_select">Filter by:</label>
       <select name="category_id" id="category_select">
         <% @categories.each do |category| %>
