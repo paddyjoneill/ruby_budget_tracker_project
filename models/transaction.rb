@@ -5,7 +5,7 @@ require_relative('./bill')
 
 class Transaction
 
-  attr_reader :id, :merchant_id, :category_id, :amount, :time
+  attr_reader :id, :merchant_id, :category_id, :amount, :time, :is_bill, :bill_id
   attr_accessor :date
 
   def initialize(options)
@@ -15,6 +15,7 @@ class Transaction
     @amount = options['amount'].to_i
     @time = options['time']
     @date = options['date']
+    #these two only used if recurring bill
     @is_bill = options['is_bill'] if options['is_bill']
     @bill_id = options['bill_id'] if options['bill_id']
   end
@@ -34,6 +35,7 @@ class Transaction
     @id = results.first()['id'].to_i
   end
 
+# returns all transactions
   def self.all()
     sql = "SELECT * FROM transactions
             ORDER BY date;"
@@ -45,6 +47,7 @@ class Transaction
     return results_array
   end
 
+# returns all transactions for a month
   def self.month(month, year)
     sql = "SELECT * FROM transactions
             WHERE EXTRACT(MONTH from date) = $1
@@ -59,6 +62,7 @@ class Transaction
     return results_array
   end
 
+# returns all transactions for a category in a month
   def self.month_category(month, year, category_id)
     sql = "SELECT * FROM transactions
             WHERE EXTRACT(MONTH from date) = $1
@@ -74,6 +78,7 @@ class Transaction
     return results_array
   end
 
+# returns all transactions for a merchant in a month
   def self.month_merchant(month, year, merchant_id)
     sql = "SELECT * FROM transactions
             WHERE EXTRACT(MONTH from date) = $1
@@ -89,6 +94,7 @@ class Transaction
     return results_array
   end
 
+# finds transaction by id
   def self.find( id )
     sql = "SELECT * FROM transactions
     WHERE id = $1"
@@ -98,6 +104,7 @@ class Transaction
     result.date = Date.parse result.date
     return result
   end
+
 
   def update()
     sql = " UPDATE transactions SET (
@@ -129,7 +136,6 @@ class Transaction
   end
 
   def self.recurring_bill(options)
-    # binding.pry
     @date = Date.parse(options['date'])
     @end_date = Date.parse(options['end_date'])
     bill = Bill.new(options)
@@ -144,11 +150,16 @@ class Transaction
     end
   end
 
-  def self.delete_bill(id)
-
-
+  def self.delete_bill(bill_id, date)
+    sql = "DELETE FROM transactions WHERE bill_id = $1 AND date > $2"
+    values = [bill_id, date]
+    SqlRunner.run( sql, values )
   end
 
+  def self.update_bill(options, bill_id)
+    self.delete_bill(bill_id, options['date'])
+    self.recurring_bill(options)
+  end
 
 
 end

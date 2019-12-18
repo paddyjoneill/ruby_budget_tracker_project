@@ -20,13 +20,13 @@
       <input value="<%= Date.today %>" type="date" name="date" id="date"/>
     </div>
 
-    <% if params['bill'] != nil %>
+    <% if params['is_bill'] != nil %>
       <div class="form-el">
         <label for="end_date">End Date:</label>
         <input value="<%= Date.today %>" type="date" name="end_date" id="end_date"/>
       </div>
 
-      <input type="hidden" id="bill" name="bill" value="true">
+      <input type="hidden" id="is_bill" name="is_bill" value="true">
     <% end %>
 
     <div class="form-el">

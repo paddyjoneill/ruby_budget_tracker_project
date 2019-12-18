@@ -64,7 +64,7 @@ end
 # create
 post '/transactions' do
   # binding.pry
-  if params['bill'] != nil
+  if params['is_bill'] != nil
     Transaction.recurring_bill(params)
   else
     Transaction.new(params).save
