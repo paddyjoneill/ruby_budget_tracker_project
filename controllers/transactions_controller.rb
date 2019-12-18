@@ -43,6 +43,7 @@ get '/transactions/:id' do
   @transaction = Transaction.find(params[:id].to_i)
   @merchants = Merchant.all()
   @categories = Category.all()
+  @bill = Bill.find(@transaction.bill_id.to_i) if @transaction.bill_id
   erb(:"transactions/show")
 end
 
@@ -51,7 +52,7 @@ get '/transactions/:id/edit' do
   @transaction = Transaction.find(params[:id].to_i)
   @merchants = Merchant.all_active()
   @categories = Category.all_active()
-  @bill = Bill.find(@transaction.bill_id.to_i)
+  @bill = Bill.find(@transaction.bill_id.to_i) if @transaction.bill_id
   erb(:"transactions/edit")
 end
 
@@ -77,7 +78,7 @@ post '/transactions/:id' do
   if params['is_bill'] != nil
     Transaction.update_bill(params)
   else
-    Transaction.new(params).save
+    Transaction.new(params).update
   end
   redirect to "/budgets?month=#{Date.today.month}&year=#{Date.today.year}"
 end

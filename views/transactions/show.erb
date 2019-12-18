@@ -1,17 +1,44 @@
 <h3>Transaction Details</h3>
 <br>
-<ul>
-  <li>Merchant: <% for merchant in @merchants %>
-    <%= merchant.name.capitalize if @transaction.merchant_id == merchant.id %>
-    <% end %></li>
-  <li>Category: <% for category in @categories %>
-    <%= category.name.capitalize if @transaction.category_id == category.id %>
-    <% end %></li>
-  <li>Amount: £<%= @transaction.amount %></li>
-  <!-- <li>Time: <%= @transaction.time %></li> -->
-  <li>Date: <%= @transaction.date %></li>
-</ul>
+<table>
+  <tr>
+    <th>Merchant </th>
+    <th><% for merchant in @merchants %>
+      <%= merchant.name.capitalize if @transaction.merchant_id == merchant.id %>
+      <% end %></th>
+  </tr>
+  <tr>
+    <th>Category</th>
+    <th><% for category in @categories %>
+      <%= category.name.capitalize if @transaction.category_id == category.id %>
+      <% end %></th>
+  </tr>
+  <tr>
+    <th>Amount</th>
+    <th>£<%= @transaction.amount %></th>
+  </tr>
+  <tr>
+    <th>Date</th>
+    <th><%= @transaction.date %></th>
+  </tr>
+
+  <% if @transaction.is_bill == true %>
+
+  <tr>
+    <th>Recurring Bill</th>
+    <th><%= @transaction.is_bill.to_s.capitalize %></th>
+  </tr>
+  <tr>
+    <th>Last Bill Date</th>
+    <th><%= @bill.end_date if @transaction.is_bill == true %></th>
+  </tr>
+
+  <% end %>
+
+</table>
+
+
 <br>
-<h3><a href="/transactions/<%= @transaction.id %>/edit">Edit</a></h3>
-<h3><a href="/transactions/<%= @transaction.id %>/delete">Delete</a></h3>
-<h3><a href="/transactions?month=<%= @transaction.date.month %>&year=<%= @transaction.date.year %>">Back to List</a></h3>
+<h3 class="button"><a href="/transactions/<%= @transaction.id %>/edit">Edit</a></h3>
+<h3 class="button"><a href="/transactions/<%= @transaction.id %>/delete">Delete</a></h3>
+<h3 class="button"><a href="/budgets?month=<%= @transaction.date.month %>&year=<%= @transaction.date.year %>">Back to List</a></h3>

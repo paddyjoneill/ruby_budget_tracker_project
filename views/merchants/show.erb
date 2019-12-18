@@ -1,19 +1,29 @@
-<ul class="details">
-  <li>Name: <%= @merchant.name.capitalize %></li>
-  <li>Status: <%= if @merchant.active == true
-                  "Active"
-                else
-                  "Inactive"
-                end %></li>
-  <li>
-    Category: <% for category in @categories%>
+<br>
+<table>
+  <tr>
+    <th>Name</th>
+    <th><%= @merchant.name.capitalize %></th>
+  </tr>
+  <tr>
+    <th>Status</th>
+    <th><%= if @merchant.active == true
+                    "Active"
+                  else
+                    "Inactive"
+                  end %></th>
+  </tr>
+  <tr>
+    <th>Category</th>
+    <th><% for category in @categories%>
     <%= category.name.capitalize if category.id == @merchant.default_cat_id %>
-    <% end %>
-  </li>
+    <% end %></th>
+  </tr>
 
-</ul>
+</table>
 
-  <a class="details" href="/merchants/<%= @merchant.id %>/edit">Edit Details</a>
-  <br>
-  <br>
-  <a class="details" href="/merchants">Back to List</a>
+
+<br>
+
+  <h3 class="button"><a href="/merchants/<%= @merchant.id %>/edit">Edit Details</a></h3>
+
+  <h3 class="button"><a href="/merchants">Back to List</a></h3>

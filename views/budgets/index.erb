@@ -14,8 +14,7 @@
     <th>Amount</th>
     <th>Date</th>
     <th> </th>
-    <th> </th>
-    <th> </th>
+  
   </tr>
   <% for transaction in @transactions %>
   <tr><% for merchant in @merchants %>
@@ -28,8 +27,6 @@
      <th><%= transaction.date %></th>
      <th><a href="/transactions/<%= transaction.id %>">Details</a></th>
 
-     <th><a href="/transactions/<%= transaction.id %>/edit<%= "?is_bill=true" if transaction.is_bill == true %>">Edit</a></th>
-     <th><a href="/transactions/<%= transaction.id %>/delete">Delete</a></th>
    </tr>
 
   <% end %>
@@ -46,8 +43,8 @@
   <div class="form-wrapper">
 
     <div class="custom-select" style="width:200px;">
-      <label for="category_select">Filter by:</label>
-      <select name="category_id" id="category_select">
+      <label>Filter by:</label>
+      <select name="category_id" class="dropdown">
         <% @categories.each do |category| %>
             <option value=<%= category.id %>><%= category.name.capitalize %></option>
         <% end %>
@@ -61,7 +58,7 @@
 
   </div>
 
-  <h3><a href="/transactions/new">Add New Transaction</a></h3>
-  <h3><a href="/transactions/new?is_bill=true">Add New Bill</a></h3>
-  <h3><a href="/budgets/edit">Edit Budgeting</a></h3>
+  <h3 class="button"><a href="/transactions/new">Add New Transaction</a></h3>
+  <h3 class="button"><a href="/transactions/new?is_bill=true">Add New Bill</a></h3>
+  <h3 class="button"><a href="/budgets/edit">Edit Budgeting</a></h3>
 </form>
