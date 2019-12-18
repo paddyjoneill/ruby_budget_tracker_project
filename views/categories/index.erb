@@ -1,7 +1,9 @@
+<br>
 <table>
   <tr>
     <th>Category</th>
     <th>Status</th>
+    <th></th>
   </tr>
   <% for category in @categories %>
     <tr><%= "<th>#{category.name.capitalize}</th>" %>
@@ -14,4 +16,4 @@
   <% end %>
 </table>
 
-<h3><a href="/categories/new">Add New Category</a></h3>
+<h3 class="button"><a href="/categories/new">Add New Category</a></h3>
