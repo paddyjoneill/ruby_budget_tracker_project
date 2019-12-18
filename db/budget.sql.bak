@@ -1,7 +1,6 @@
 DROP TABLE transactions;
 DROP TABLE merchants;
 DROP TABLE categories;
-DROP TABLE bills;
 DROP TABLE budgets;
 
 CREATE TABLE budgets
@@ -10,12 +9,6 @@ CREATE TABLE budgets
   monthly_budget INT,
   target INT,
   income INT
-);
-
-CREATE TABLE bills
-(
-  bill_id SERIAL primary key,
-  end_date DATE
 );
 
 CREATE TABLE categories
@@ -40,7 +33,5 @@ CREATE TABLE transactions
   category_id INT references categories(id),
   amount INT,
   time VARCHAR(255),
-  date DATE,
-  is_bill BOOLEAN,
-  bill_id INT references bills(bill_id)
+  date DATE
 );

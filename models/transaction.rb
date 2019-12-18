@@ -1,6 +1,7 @@
 require_relative('../db/sqlrunner')
 require_relative('./merchant')
 require_relative('./category')
+require_relative('./bill')
 
 class Transaction
 
@@ -14,19 +15,21 @@ class Transaction
     @amount = options['amount'].to_i
     @time = options['time']
     @date = options['date']
+    @is_bill = options['is_bill'] if options['is_bill']
+    @bill_id = options['bill_id'] if options['bill_id']
   end
 
   def save()
     sql = "INSERT INTO transactions
     (
-      merchant_id, category_id, amount, time, date
+      merchant_id, category_id, amount, time, date, is_bill, bill_id
     )
     VALUES
     (
-      $1, $2, $3, $4, $5
+      $1, $2, $3, $4, $5, $6, $7
     )
     RETURNING id"
-    values = [@merchant_id, @category_id, @amount, @time, @date]
+    values = [@merchant_id, @category_id, @amount, @time, @date, @is_bill, @bill_id]
     results = SqlRunner.run(sql, values)
     @id = results.first()['id'].to_i
   end
@@ -129,12 +132,21 @@ class Transaction
     # binding.pry
     @date = Date.parse(options['date'])
     @end_date = Date.parse(options['end_date'])
+    bill = Bill.new(options)
+    bill.save()
+    options['bill_id'] = bill.bill_id.to_i
+    options['is_bill'] = true
     while @date < @end_date
       options['date'] = @date
       bill = Transaction.new(options)
       bill.save()
       @date = @date >> 1
     end
+  end
+
+  def self.delete_bill(id)
+
+
   end
 
 
