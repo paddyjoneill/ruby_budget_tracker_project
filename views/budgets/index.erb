@@ -14,7 +14,7 @@
     <th>Amount</th>
     <th>Date</th>
     <th> </th>
-  
+
   </tr>
   <% for transaction in @transactions %>
   <tr><% for merchant in @merchants %>
@@ -34,7 +34,13 @@
 <p>Total: £<%= @total %></p>
 
 <% if params['category_id'] == nil %>
-<h3>Remaining Monthly Budget: £<%= @budgetremaining %></h3>
+<h3 style="
+<% if @budgetremaining < 0 %>
+  background:red;width:500px;
+<% elsif @budgetremaining <= 100%>
+  background:yellow;width:500px;
+<% end %>
+">Remaining Monthly Budget: £<%= @budgetremaining %></h3>
 <h3>Income: £<%= @budget.income %></h3>
 <h3>Savings Target: £<%= @budget.target %></h3>
 <% end %>

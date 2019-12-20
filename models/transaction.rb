@@ -169,8 +169,8 @@ class Transaction
     options['is_bill'] = true
     while @date < @end_date
       options['date'] = @date
-      bill = Transaction.new(options)
-      bill.save()
+      trans = Transaction.new(options)
+      trans.save()
       @date = @date >> 1
     end
   end
