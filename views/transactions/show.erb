@@ -39,6 +39,6 @@
 
 
 <br>
-<h3 class="button"><a href="/transactions/<%= @transaction.id %>/edit">Edit</a></h3>
+<h3 class="button"><a href="/transactions/<%= @transaction.id %>/edit<% if @transaction.is_bill == true %>?is_bill=true<% end %>">Edit</a></h3>
 <h3 class="button"><a href="/transactions/<%= @transaction.id %>/delete">Delete</a></h3>
 <h3 class="button"><a href="/budgets?month=<%= @transaction.date.month %>&year=<%= @transaction.date.year %>">Back to List</a></h3>
