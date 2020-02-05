@@ -182,7 +182,6 @@ class Transaction
   end
 
   def self.update_bill(options)
-    # binding.pry
     self.delete_bill(options['bill_id'], options['date'])
     self.recurring_bill(options)
   end

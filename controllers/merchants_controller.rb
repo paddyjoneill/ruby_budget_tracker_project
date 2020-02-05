@@ -1,7 +1,7 @@
 require 'sinatra'
 # require 'sinatra/contrib/all'
 require 'pg'
-require 'pry'
+# require 'pry'
 
 
 require_relative ('../models/category')

@@ -2,7 +2,7 @@ require('minitest/autorun')
 require('minitest/reporters')
 require_relative('../models/merchant')
 require_relative('../models/category')
-require('pry')
+# require('pry')
 
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
