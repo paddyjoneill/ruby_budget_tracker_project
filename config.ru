@@ -1,5 +1,3 @@
-require './app.rb' 
-require 'rubygems'
-require 'pg'
-require 'sinatra'
+require './app.rb'
+
 run Sinatra::Application
